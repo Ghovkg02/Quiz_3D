@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Levels</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body, html {
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+
+        /* Fullscreen video */
+        .video-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Centering content */
+        .content {
+            position: relative;
+            z-index: 1;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 48px;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        /* Button styling */
+        .btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            background-color: rgba(255, 215, 0, 0.8);
+            border: none;
+            cursor: pointer;
+            border-radius: 10px;
+            color: black;
+            transition: background-color 0.3s ease;
+            position: absolute;
+        }
+
+        .btn:hover {
+            background-color: rgba(255, 215, 0, 1);
+        }
+
+        .btn.disabled {
+            background-color: grey;
+            cursor: not-allowed;
+        }
+
+        /* Button positions using top and left percentages */
+        #level1 { top: 89%; left: 07%; }
+        #level2 { top: 34%; left: 30%; }
+        #level3 { top: 35%; left: 70%; }
+        #level4 { top: 90%; left: 70%; }
+        #bossLevel { top: 68%; left: 45%; }
+    </style>
+</head>
+<body>
+
+<div class="video-container">
+    <video autoplay muted loop>
+        <source src="images/mapc1.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+    </video>
+</div>
+
+<div class="content">
+    
+    <button id="level1" class="btn">Level 1</button>
+    <button id="level2" class="btn">Level 2</button>
+    <button id="level3" class="btn">Level 3</button>
+    <button id="level4" class="btn">Level 4</button>
+    <button id="bossLevel" class="btn">Boss Level</button>
+</div>
+
+<script>
+    const currentLevel = localStorage.getItem('currentLevel') || 1;
+
+    document.getElementById('level1').addEventListener('click', () => {
+        window.location.href = '/game.html'; // Level 1
+    });
+
+    document.getElementById('level2').addEventListener('click', () => {
+        if (currentLevel >= 2) window.location.href = '/game1.html'; // Level 2
+    });
+
+    document.getElementById('level3').addEventListener('click', () => {
+        if (currentLevel >= 3) window.location.href = '/game2.html'; // Level 3
+    });
+
+    document.getElementById('level4').addEventListener('click', () => {
+        if (currentLevel >= 4) window.location.href = '/game3.html'; // Level 4
+    });
+
+    document.getElementById('bossLevel').addEventListener('click', () => {
+        if (currentLevel >= 5) window.location.href = '/game4.html'; // Boss Level
+    });
+
+    // Disable buttons for locked levels
+    if (currentLevel < 2) document.getElementById('level2').classList.add('disabled');
+    if (currentLevel < 3) document.getElementById('level3').classList.add('disabled');
+    if (currentLevel < 4) document.getElementById('level4').classList.add('disabled');
+    if (currentLevel < 5) document.getElementById('bossLevel').classList.add('disabled');
+</script>
+
+</body>
+</html>
